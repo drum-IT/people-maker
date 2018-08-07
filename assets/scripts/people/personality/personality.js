@@ -6,6 +6,7 @@ import moods from "./moods";
 import motivators from "./motivators";
 import quirks from "./quirks";
 import spirituality from "./spirituality";
+import topics from "./conversation";
 import traits from "./traits";
 import types from "./types";
 
@@ -71,6 +72,7 @@ class Personality {
     this.hobbies = Personality.getHobbies();
     this.disorder = Personality.getDisorders();
     this.type = types[Math.floor(Math.random() * types.length)];
+    this.conversationTopics = Personality.getTopics();
   }
 }
 
@@ -87,7 +89,7 @@ Personality.getMood = emotion => {
 // QUIRKS
 // get some random quirks
 Personality.getQuirks = () => {
-  const numberOfQuirks = util.getRandomInt([1, 5]);
+  const numberOfQuirks = util.getRandomInt([1, 3]);
   const quirkIndices = [];
   while (quirkIndices.length < numberOfQuirks) {
     const index = util.getRandomInt([0, quirks.length - 1]);
@@ -100,7 +102,7 @@ Personality.getQuirks = () => {
 // HOBBIES
 // get some random hobbies
 Personality.getHobbies = () => {
-  const numberOfHobbies = util.getRandomInt([1, 5]);
+  const numberOfHobbies = util.getRandomInt([1, 3]);
   const hobbyIndices = [];
   while (hobbyIndices.length < numberOfHobbies) {
     const index = util.getRandomInt([0, hobbies.length - 1]);
@@ -110,17 +112,26 @@ Personality.getHobbies = () => {
   return hobbyList;
 };
 
-// HOBBIES
-// get some random hobbies
-Personality.getHobbies = () => {
-  const numberOfHobbies = util.getRandomInt([1, 5]);
-  const hobbyIndices = [];
-  while (hobbyIndices.length < numberOfHobbies) {
-    const index = util.getRandomInt([0, hobbies.length - 1]);
-    hobbyIndices.indexOf(index) === -1 ? hobbyIndices.push(index) : null;
+// TOPICS
+// get some random topics of conversation
+Personality.getTopics = () => {
+  const numberOfTopics = util.getRandomInt([1, 3]);
+  const topicIndices = [];
+  while (topicIndices.length < numberOfTopics) {
+    const index = util.getRandomInt([0, topics.length - 1]);
+    topicIndices.indexOf(index) === -1 ? topicIndices.push(index) : null;
   }
-  const hobbyList = hobbyIndices.map(index => hobbies[index]);
-  return hobbyList;
+  const topicList = topicIndices.map((index, i) => {
+    if (topicIndices.length === 1) {
+      return `${topics[index].toLowerCase()}.`;
+    }
+    if (i === topicIndices.length - 1) {
+      return `and ${topics[index].toLowerCase()}.`;
+    } else {
+      return `${topics[index].toLowerCase()}, `;
+    }
+  });
+  return topicList;
 };
 
 // // DISORDERS

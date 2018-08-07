@@ -2,14 +2,18 @@
 // import Skill from "./skill";
 // import Stat from "./stat";
 import Personality from "./personality/personality";
+import professions from "./professions/professions";
 
 import util from "../util/util";
+import peopleUtil from "./peopleUtil";
 
 class Employee {
   constructor() {
-    this.name = Employee.getNormalName();
+    // this.name = Employee.getNormalName();
+    this.name = peopleUtil.getName();
     this.birthdate = Employee.generateBirthdate();
     this.personality = new Personality();
+    this.profession = Employee.getProfession();
   }
 }
 
@@ -37,6 +41,10 @@ Employee.generateBirthdate = () => {
   const birthdate = new Date(Date.now() - age);
   // return the birthdate
   return birthdate;
+};
+
+Employee.getProfession = () => {
+  return professions[Math.floor(Math.random() * professions.length)];
 };
 
 const normalNameData = {

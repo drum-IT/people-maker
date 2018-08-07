@@ -8,8 +8,10 @@ const religionTable = document.getElementById("religion_table");
 const hobbyTable = document.getElementById("hobby_table");
 const quirkTable = document.getElementById("quirk_table");
 
+const hidden = document.querySelectorAll(".hidden");
+
 export function updatePersonDetails(person) {
-  personNameField.innerText = person.name;
+  personNameField.innerText = `${person.name} - ${person.profession}`;
   const personTableHTML = [
     `
     <tr>
@@ -19,6 +21,11 @@ export function updatePersonDetails(person) {
       <td class="data__text">Driven by the need ${
         person.personality.motivator.description
       }</td>
+    </tr>
+    <tr>
+      <td class="data__text">Loves to talk about ${person.personality.conversationTopics.join(
+        ""
+      )}</td>
     </tr>
   `
   ];
@@ -40,7 +47,8 @@ export function updatePersonDetails(person) {
         trait !== "spirituality" &&
         trait !== "quirks" &&
         trait !== "hobbies" &&
-        trait !== "disorder"
+        trait !== "disorder" &&
+        trait !== "conversationTopics"
       ) {
         return `
           <tr>
@@ -118,5 +126,6 @@ export function updatePersonDetails(person) {
 
 export function newPerson() {
   const newPerson = new Person();
+  hidden.forEach(hidden => hidden.classList.remove("hidden"));
   updatePersonDetails(newPerson);
 }
