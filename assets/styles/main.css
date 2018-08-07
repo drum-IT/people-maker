@@ -1,0 +1,104 @@
+:root {
+}
+
+html,
+body {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas:
+    "peo peo hob qui"
+    "peo peo hob qui"
+    "rel rel per per"
+    "rel rel per per"
+    "con con con con";
+  grid-template-columns: 1fr 1fr repeat(2, 150px);
+  grid-template-rows: auto auto auto auto 4rem;
+  height: calc(100vh - 40px);
+  margin: 20px 20px;
+  width: calc(100vw - 40px);
+}
+
+.container > * {
+  /* outline: 1px solid red; */
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.list {
+  padding: 5px;
+}
+
+.person {
+  grid-area: peo;
+}
+
+.hobbies {
+  grid-area: hob;
+}
+
+.quirks {
+  grid-area: qui;
+}
+
+.religion {
+  grid-area: rel;
+}
+
+.personality {
+  grid-area: per;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  grid-area: con;
+  outline: none;
+}
+
+button:hover {
+  background: black;
+  color: white;
+}
+
+/* TABLES */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+th {
+  padding: 5px 0;
+}
+
+td {
+  padding: 5px 0;
+}
+
+.data__label {
+  font-weight: bold;
+}
+
+.data__value {
+  text-align: right;
+}
+
+.data_text {
+  text-align: left;
+}
+
+.data__single {
+  text-align: center;
+}
