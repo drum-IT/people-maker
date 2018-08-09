@@ -8,7 +8,8 @@ const religionTable = document.getElementById("religion_table");
 const hobbyTable = document.getElementById("hobby_table");
 const quirkTable = document.getElementById("quirk_table");
 
-const hidden = document.querySelectorAll(".hidden");
+const list = document.querySelectorAll(".list");
+const control = document.getElementById("control");
 
 export function updatePersonDetails(person) {
   personNameField.innerText = `${person.name} - ${person.profession}`;
@@ -125,7 +126,60 @@ export function updatePersonDetails(person) {
 }
 
 export function newPerson() {
+  control.classList.add("disabled");
+  control.classList.add("animated", "bounceOutLeft");
   const newPerson = new Person();
-  hidden.forEach(hidden => hidden.classList.remove("hidden"));
+  list.forEach((listItem, index) => {
+    if (Array.from(listItem.classList).indexOf("hidden") > -1) {
+      listItem.classList.add("animated", "bounceInRight");
+      listItem.classList.remove("hidden");
+      if (index === list.length - 1) {
+        updatePersonDetails(newPerson);
+        setTimeout(() => {
+          control.classList.remove("disabled");
+          control.classList.remove("new");
+          control.classList.remove("bounceOutLeft");
+          control.classList.add("old");
+          control.classList.add("fadeIn");
+        }, 1000);
+      }
+    } else {
+      listItem.classList.remove("bounceInRight");
+      listItem.classList.add("bounceOutLeft");
+      control.classList.remove("fadeIn");
+      control.classList.add("bounceOutLeft");
+      setTimeout(() => {
+        listItem.classList.remove("bounceOutLeft");
+        listItem.classList.add("bounceInRight");
+      }, 500);
+      if (index === list.length - 1) {
+        setTimeout(() => {
+          clearPersonDetails();
+        }, 500);
+        setTimeout(() => {
+          updatePersonDetails(newPerson);
+        }, 600);
+        setTimeout(() => {
+          control.classList.remove("bounceOutLeft");
+          control.classList.add("fadeIn");
+          control.classList.remove("disabled");
+        }, 1500);
+      }
+    }
+  });
+}
+
+function clearPersonDetails() {
+  personalityTable.innerHTML = "";
+  personTable.innerHTML = "";
+  religionTable.innerHTML = "";
+  hobbyTable.innerHTML = "";
+  quirkTable.innerHTML = "";
+}
+
+function start() {
+  const newPerson = new Person();
   updatePersonDetails(newPerson);
 }
+
+// start();

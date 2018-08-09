@@ -1,26 +1,29 @@
 :root {
+  --grey: rgba(0, 0, 0, 0.7);
 }
 
 html,
 body {
   box-sizing: border-box;
-  font-family: sans-serif;
-  font-size: 14px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 16px;
   margin: 0;
   padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 html {
-  height: auto;
-  min-height: 100%;
-
-  background: linear-gradient(270deg, #5dd2b3, #b25dd2);
-  background-size: 400% 400%;
-
   -webkit-animation: AnimationName 5s ease infinite;
   -moz-animation: AnimationName 5s ease infinite;
   -o-animation: AnimationName 5s ease infinite;
   animation: AnimationName 5s ease infinite;
+  background: linear-gradient(270deg, #5dd2b3, #b25dd2);
+  background-size: 400% 400%;
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
 @-webkit-keyframes AnimationName {
@@ -72,28 +75,69 @@ html {
   display: grid;
   grid-gap: 20px;
   grid-template-areas:
-    "con con"
-    "peo peo"
-    "hob qui"
-    "per rel"
-    "per rel";
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 4rem auto auto auto auto;
-  padding: 20px 20px;
+    /* "con con con con con" */
+    "peo peo peo peo peo"
+    "per per rel rel hob"
+    "per per rel rel qui";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  /* grid-template-rows: 4rem auto auto auto; */
+  grid-template-rows: auto auto auto;
+  padding: 20px 20px 20px 20px;
 }
 
 .container > * {
   background: white;
-  border: 2px solid black;
   border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  color: var(--grey);
+}
+
+.control {
+  align-items: center;
+  background: black;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  color: white;
+  display: flex;
+  height: 3rem;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  left: calc(50vw - 80px);
+  width: 160px;
+  text-decoration: none;
+}
+
+.control:hover {
+  background: black;
+  color: white;
+}
+
+.new {
+  top: calc(50vh - 1.5rem);
+  margin: 0 auto;
+}
+
+.old {
+  position: static;
+  left: 0;
+  margin: 0 auto 20px auto;
+}
+
+.disabled {
+  pointer-events: none;
 }
 
 .hidden {
-  display: none;
+  /* display: none; */
+  opacity: 0;
 }
 
 .list {
   padding: 10px;
+  transition: opacity 100ms linear;
 }
 
 .person {
@@ -114,21 +158,6 @@ html {
 
 .personality {
   grid-area: per;
-}
-
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  grid-area: con;
-  height: 100%;
-  outline: none;
-}
-
-button:hover {
-  background: black;
-  color: white;
 }
 
 /* TABLES */
@@ -154,7 +183,9 @@ td {
   text-align: right;
 }
 
-.data_text {
+.data__text {
+  line-height: 25px;
+  padding: 10px 0;
   text-align: left;
 }
 
@@ -162,13 +193,30 @@ td {
   text-align: center;
 }
 
+@media (max-width: 750px) {
+  .container {
+    grid-template-areas:
+      /* "con con con con" */
+      "peo peo peo peo"
+      "hob hob qui qui"
+      "per per rel rel"
+      "per per rel rel";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* grid-template-rows: 4rem auto auto auto auto; */
+    grid-template-rows: auto auto auto auto;
+  }
+}
+
 @media (max-width: 550px) {
   .container {
     grid-template-areas:
-      "con con"
+      /* "con con" */
       "peo peo"
       "hob qui"
       "per per"
       "rel rel";
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: 4rem auto auto auto auto; */
+    grid-template-rows: auto auto auto auto;
   }
 }
